@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "b1607fbe-1c9c-47c7-85b1-91a5cefd17ab",
+		"name": "plantilla",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26275912",
+		"_collection_link": "https://abdr-cgr.postman.co/workspace/Team-Andes~d265eaeb-c478-4a25-aa15-cef961384315/collection/26275912-b1607fbe-1c9c-47c7-85b1-91a5cefd17ab?action=share&source=collection_link&creator=26275912"
+	},
+	"item": [
+		{
+			"name": "/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authentication-control/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/plantilla/authentication-control/v1/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"plantilla",
+						"authentication-control",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-manager/user (listar)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/plantilla/user-manager/v1/user?pageNumber=1&pageSize=10&orderBy=name",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"plantilla",
+						"user-manager",
+						"v1",
+						"user"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "orderBy",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-manager/user (get)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/plantilla/user-manager/v1/user/1003",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"plantilla",
+						"user-manager",
+						"v1",
+						"user",
+						"1003"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-manager/user (Nuevo)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Alexander\",\r\n    \"username\":\"alexander\",\r\n    \"email\":\"alexander@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/plantilla/user-manager/v1/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"plantilla",
+						"user-manager",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-manager/user (editar)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1003,\r\n    \"name\": \"usuarioABC Pedroaa\",\r\n    \"email\": \"email@email.com\",\r\n    \"username\": \"usuarioABC\",\r\n    \"password\": \"usuarioABC\",\r\n    \"code\": \"CODusuarioABC\",\r\n    \"roles\": \"ROL_USER2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/plantilla/user-manager/v1/user/1003",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"plantilla",
+						"user-manager",
+						"v1",
+						"user",
+						"1003"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

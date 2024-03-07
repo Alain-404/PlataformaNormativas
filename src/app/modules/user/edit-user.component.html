@@ -1,0 +1,33 @@
+<div class="mb-3">
+  <label for="" class="form-label">User Name</label>
+  <input type="text" class="form-control" name="" placeholder="" [(ngModel)]="this._usuario.username" />
+  <small id="helpId" class="form-text text-muted"></small>
+</div>
+
+<div class="mb-3">
+  <label for="" class="form-label">Código</label>
+  <input type="text" class="form-control" name="" placeholder="" [(ngModel)]="this._usuario.code" />
+  <small id="helpId" class="form-text text-muted"></small>
+</div>
+
+<div class="mb-3">
+  <label for="" class="form-label">Name</label>
+  <input type="text" class="form-control" name="" placeholder="" [(ngModel)]="this._usuario.name" />
+  <small id="helpId" class="form-text text-muted"></small>
+</div>
+
+<div class="mb-3">
+  <label for="" class="form-label">Roles</label>
+  <input type="text" class="form-control" name="" placeholder="" [(ngModel)]="this._usuario.roles" />
+  <small id="helpId" class="form-text text-muted"></small>
+</div>
+
+
+
+<button type="button" class="btn btn-primary mx-auto" (click)="onGrabar()">
+  Grabar
+</button>
+
+<button type="button" class="btn btn-secondary mx-auto" [routerLink]="['/moduser/list']">
+  Cancelar
+</button>

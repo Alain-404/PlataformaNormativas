@@ -1,0 +1,58 @@
+.card {
+    width: 90%;
+}
+
+
+.chip-list {
+    width: 100%;
+  }
+
+.fieldform {
+    width: 100%;
+    margin-bottom: 0.8%;
+}
+
+section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  .hint {
+    color: #f02121; 
+  }
+
+  .mat-form-field {
+    .mat-form-field-subscript-wrapper {
+        .mat-error {
+            color: red;
+            font-size: 12px; 
+        }
+    }
+}
+

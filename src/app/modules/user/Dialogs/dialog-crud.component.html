@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>{{ action === 'nuevo' ? 'Crear Usuario' : 'Editar Informacion' }}</h2>
+<mat-dialog-content class="dialogo">
+    <mat-form-field class="input">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" [(ngModel)]="infousuario.username">
+    </mat-form-field>
+    <mat-form-field class="input">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]="infousuario.name">
+    </mat-form-field>
+    <mat-form-field class="input">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" [(ngModel)]="infousuario.email">
+    </mat-form-field>
+    <mat-form-field class="input">
+        <mat-label>Roles</mat-label>
+        <input matInput type="text" [(ngModel)]="infousuario.roles">
+    </mat-form-field>
+    <mat-form-field class="input" *ngIf="action === 'nuevo'">
+        <mat-label>Password</mat-label>
+        <input matInput type="text" [(ngModel)]="infousuario.password">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="containerBotones">
+    <button mat-button (click)="onNoClick()">Cerrar</button>
+    <button mat-button cdkFocusInitial (click)="confirm()" color="accent">Guardar</button>
+</mat-dialog-actions>
+
+
+

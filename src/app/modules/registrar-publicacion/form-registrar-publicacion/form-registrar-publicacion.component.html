@@ -1,0 +1,112 @@
+<div class="card">
+    <div class="card-body">
+        <Form [formGroup]="myForm" (ngSubmit)="procesar()" novalidate>
+            <section class="content-header">
+                <h1>
+                    Registrar Publlicación
+                    <!-- <small>Publicacion</small> -->
+                </h1>
+            </section>
+
+
+
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Nombre de la normativa</mat-label>
+                <input matInput formControlName="nombreNormativa" type="text" placeholder="Nombre de la normativa">
+                <mat-error *ngIf="myForm.get('nombreNormativa').errors && myForm.get('nombreNormativa').dirty">
+                    <ng-container *ngIf="myForm.get('nombreNormativa').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('nombreNormativa').hasError('minlength')">
+                        Mínimo 5 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Version de la Normativa</mat-label>
+                <input matInput formControlName="versionNormativa" type="text" placeholder="Version de la Normativa">
+                <mat-error *ngIf="myForm.get('versionNormativa').errors && myForm.get('versionNormativa').dirty">
+                    <ng-container *ngIf="myForm.get('versionNormativa').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('versionNormativa').hasError('minlength')">
+                        Mínimo 1 caracter
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('versionNormativa').hasError('maxlength')">
+                        Maximo 15 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Palabras Clave</mat-label>
+                <input matInput formControlName="palabraClave" type="text" placeholder="Palabras Clave">
+                <mat-error *ngIf="myForm.get('palabraClave').errors && myForm.get('palabraClave').dirty">
+                    <ng-container *ngIf="myForm.get('palabraClave').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('palabraClave').hasError('minlength')">
+                        Mínimo 3 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Email de Contacto (Dueño de Proceso)</mat-label>
+                <input matInput formControlName="contactoEmail" type="text" placeholder="Contacto (Dueño de Proceso)">
+                <mat-error *ngIf="myForm.get('contactoEmail').errors && myForm.get('contactoEmail').dirty">
+                    <ng-container *ngIf="myForm.get('contactoEmail').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('contactoEmail').hasError('email')">
+                        No es un email valido
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Seleccione el(los) Archivos (Máx. 10MB)</label>
+                <input #pdfInput class="form-control" type="file" name="archivoNormativa" id="formFileMultiple" multiple
+                    onclick="this.value=null" (change)="pdfInputChange($event)" accept=".pdf" />
+            </div>
+            <!--<input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)" accept=".csv"/>
+                <button mat-flat-button color="primary" (click)="csvInput.click()">Selecione un archivo (CSV)</button> -->
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Objetivo de la normativa</mat-label>
+                <textarea matInput formControlName="objetivoNormativa" type="text"
+                    placeholder="Objetivo de la normativa" name="objetivoNormativa"></textarea>
+                <mat-error *ngIf="myForm.get('objetivoNormativa').errors && myForm.get('objetivoNormativa').dirty">
+                    <ng-container *ngIf="myForm.get('objetivoNormativa').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('objetivoNormativa').hasError('minlength')">
+                        Mínimo 5 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+
+
+            <angular-editor id="editor" formControlName="htmlContent" [config]="config">
+                <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+                  <ae-toolbar-set>
+                    <ae-button iconClass="fa fa-html5" title="Angular editor logo"
+                               (buttonClick)="executeCommandFn('insertHtml', angularEditorLogo)">
+                    </ae-button>
+                  </ae-toolbar-set>
+                </ng-template>
+              </angular-editor>
+
+            <section>
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="myForm.invalid">Registrar</button>
+                    <button mat-raised-button color="accent">Cancelar</button>
+                </div>
+            </section>
+        </Form>
+    </div>
+</div>
