@@ -1,1 +1,91 @@
-<p>form-proceso-mp works!</p>
+<div class="card">
+    <div class="card-body">
+        <Form [formGroup]="myForm" (ngSubmit)="procesar()" novalidate>
+            <section class="content-header">
+                <h1>
+                    Registrar Proceso MP
+                    <!-- <small>Publicacion</small> -->
+                </h1>
+            </section>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Nombre del proceso</mat-label>
+                <input matInput formControlName="nombreProceso" type="text" placeholder="Nombre del Proceso">
+                <mat-error *ngIf="myForm.get('nombreProceso').errors && myForm.get('nombreProceso').dirty">
+                    <ng-container *ngIf="myForm.get('nombreProceso').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>               
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Responsable</mat-label>
+                <input matInput formControlName="responsableProceso" type="text" placeholder="Responsable">
+                <mat-error *ngIf="myForm.get('responsableProceso').errors && myForm.get('responsableProceso').dirty">
+                    <ng-container *ngIf="myForm.get('responsableProceso').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>               
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Version</mat-label>
+                <input matInput formControlName="versionProceso" type="text" placeholder="Version">
+                <mat-error *ngIf="myForm.get('versionProceso').errors && myForm.get('versionProceso').dirty">
+                    <ng-container *ngIf="myForm.get('versionProceso').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>               
+                </mat-error>
+            </mat-form-field>
+<!-- 
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Fecha de Vigencia</mat-label>
+                <input matInput formControlName="fvigencia" type="date" [matDatepicker]="picker"
+                    placeholder="Fecha de Vigencia" name="fvigencia">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="myForm.get('fvigencia').errors && myForm.get('fvigencia').dirty">
+                    <ng-container *ngIf="myForm.get('fvigencia').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('fvigencia').hasError('pattern')">
+                        El formato de fecha es incorrecto (Dia/Mes/Año)
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>  -->
+
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Fecha de Vigencia</mat-label>
+                <input matInput [matDatepicker]="dp" [formControl]="date">
+                <mat-datepicker-toggle matIconSuffix [for]="dp" placeholder="Fecha de Vigencia" name="date"></mat-datepicker-toggle>
+                <mat-datepicker #dp></mat-datepicker>
+                <mat-error *ngIf="myForm.get('date').errors && myForm.get('date').dirty">
+                    <ng-container *ngIf="myForm.get('date').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('date').hasError('pattern')">
+                        El formato de fecha es incorrecto (Dia/Mes/Año)
+                    </ng-container>
+                </mat-error>
+              </mat-form-field>
+
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Seleccione el(los) Archivos (Máx. 10MB)</label>
+                <input #pdfInput class="form-control" type="file" name="pdfProceso" id="formFileMultiple" multiple
+                    onclick="this.value=null" (change)="pdfInputChange($event)" accept=".pdf" />
+            </div>
+
+            <mat-slide-toggle class="deslizable"> Activo</mat-slide-toggle>
+
+            <section>
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="myForm.invalid">Registrar</button>
+                    <button mat-raised-button color="accent">Cancelar</button>
+                </div>
+            </section>
+            
+        </Form>
+    </div>
+</div>

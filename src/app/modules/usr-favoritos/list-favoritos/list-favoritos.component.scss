@@ -1,0 +1,60 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  // td, th {
+  //   width: 12.5%;
+  // }
+  
+  .mat-column-nro,
+  .mat-column-version,
+  .mat-column-orden {
+    max-width: 50px;
+  
+  }
+  
+  .mat-column-tipo,
+  .mat-column-fvigencia,
+  .mat-column-acciones {
+    max-width: 100px;
+  
+  }
+  
+  .mat-column-area {
+    max-width: 120px;
+  }
+  .contain {
+    text-align: center
+  }
+    .comlFav{
+    max-width: 1em;
+    text-align: center
+  }
+
+//   .greenClass{
+//     color: green;
+//   }
+//   .redClass{
+//     color: red;
+//   }
+
+
+  .btnStar{
+    color: rgba(228, 230, 218, 0.63);
+  }
+//   .btnStar.amarillo{
+//     color: rgb(241, 225, 0);
+//   }
+
+  .btnStar:active{
+    color: rgb(241, 225, 0);
+    
+  }
+
+
+  

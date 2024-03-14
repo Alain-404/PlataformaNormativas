@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListAdministrarReportesComponent } from '../administrar-reportes-normativas/list-administrar-reportes/list-administrar-reportes.component';
-
+import { AdministrarReportesNormativasComponent } from './administrar-reportes-normativas.component';
 
 const routes: Routes = [
+  {path: '', component: AdministrarReportesNormativasComponent, canActivate:[authGuard]},
   {path: 'list', component: ListAdministrarReportesComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
 ];

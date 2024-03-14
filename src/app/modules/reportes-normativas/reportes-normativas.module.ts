@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListReportesNormativasComponent } from './list-reportes-normativas/list-reportes-normativas.component';
+import { BuscaReportesNormativasComponent } from './busca-reportes-normativas/busca-reportes-normativas.component';
 
 
 const routes: Routes = [
+  {path: 'busca', component: BuscaReportesNormativasComponent, canActivate:[authGuard]},
   {path: 'list', component: ListReportesNormativasComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
 ];
@@ -17,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ListReportesNormativasComponent,
+    BuscaReportesNormativasComponent,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

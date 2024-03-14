@@ -90,61 +90,6 @@ procesar(){
     nombre: '',
    };
 
-  // separatorKeysCodes: number[] = [ENTER, COMMA];
-  // opcionCtrl = new FormControl('');
-  // filteredopcions: Observable<string[]>;
-  // opcions: string[] = [];
-  // allopcions: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-
-  // @ViewChild('opcionInput') opcionInput: ElementRef<HTMLInputElement>;
-
-  // announcer = inject(LiveAnnouncer);
-
-  
-
-  // add(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-
-  //   if (value && !this.opcions.includes(value)) {
-  //     this.opcions.push(value);
-  //   }
-  //   event.chipInput!.clear();
-
-  //   this.opcionCtrl.setValue(null);
-  // }
-  
-  // selected(event: MatAutocompleteSelectedEvent): void {
-  //   const selectedOption = event.option.viewValue;
-  
-  //   if (!this.opcions.includes(selectedOption)) {
-  //     this.opcions.push(selectedOption);
-  //     this.opcionInput.nativeElement.value = '';
-  //     this.opcionCtrl.setValue(null);
-  //   }
-  // }
-
-
-  // // selected(event: MatAutocompleteSelectedEvent): void {
-  // //   this.opcions.push(event.option.viewValue);
-  // //   this.opcionInput.nativeElement.value = '';
-  // //   this.opcionCtrl.setValue(null);
-  // // }
-
-  // private _filter(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.allopcions.filter(opcion => opcion.toLowerCase().includes(filterValue));
-  // }
-  
-  // remove(opcion: string): void {
-  //   const index = this.opcions.indexOf(opcion);
-
-  //   if (index >= 0) {
-  //     this.opcions.splice(index, 1);
-
-  //     this.announcer.announce(`Removed ${opcion}`);
-  //   }
-  // }
 
 
   pdfInputChange(fileInputEvent: any) {

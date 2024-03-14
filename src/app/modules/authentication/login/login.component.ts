@@ -26,7 +26,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  styleImage = 'documentos';
+  styleImage = 'city';
   form!: FormGroup;
   hide: boolean = true;
   userName: string = '';

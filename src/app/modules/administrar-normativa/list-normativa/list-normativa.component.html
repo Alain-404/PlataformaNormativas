@@ -1,69 +1,94 @@
-
-<p>list-normativa works!</p>
-
-<ng-container>
-  
-</ng-container>
-
-
-
-
-<!--
-<ng-container *ngIf="!noList; else OnlyUsuario">
-    <a class="btn btn-primary" [routerLink]="['/moduser/new']" role="button">Nuevo registro sin modal</a>
-    <div class="mainLista"> -->
-
-
-
-      <!-- <button mat-raised-button (click)="openModal('nuevo')" color="accent" class="boton">Nuevo en modal</button> -->
-      
-      <!--
-      <div class="mat-elevation-z8 datatable">
-        <table mat-table [dataSource]="userList">
-          <ng-container matColumnDef="ID">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> ID</th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="User Name">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> User Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-          </ng-container>
-          <ng-container matColumnDef="Code">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> Code </th>
-            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
-          </ng-container>
-          <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-          <ng-container matColumnDef="Roles">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> Roles </th>
-            <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
-          </ng-container>
-          <ng-container matColumnDef="Acciones">
-            <th mat-header-cell *matHeaderCellDef class="headeTabla"> Acciones </th>
-            <td mat-cell *matCellDef="let element">
-              <div class="acciones"> -->
-
-
-
-                <!-- <button mat-raised-button (click)="openModal('editar',element.id)" color="primary">
-                  Editar Modal
-                </button> -->
-
-
-                <!--
-              </div>
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
+<div class="d-flex bd-highlight">
+  <div class="p-2 flex-grow-1 bd-highlight">
+    <div class="col-9 d-flex align-items-center justify-content-start ">
+      <mat-paginator [length]="500" [pageSizeOptions]="[5, 10, 50, 100]" aria-label="Seleccione Pagina">
+      </mat-paginator>
     </div>
-  </ng-container>
-  
-  <ng-template #OnlyUsuario>
-    <div>Vista solo para usuario, sin rol admin</div>
-  </ng-template>
--->
+  </div>
+
+  <div class="p-2 bd-highlight">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <!-- <mat-label>Buscar</mat-label> -->
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nro </th>
+      <td mat-cell *matCellDef="let row"> {{row.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Area </th>
+      <td mat-cell *matCellDef="let row"> {{row.area}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+      <td mat-cell *matCellDef="let row"> {{row.tipo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nnormativa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la Normativa </th>
+      <td mat-cell *matCellDef="let row"> {{row.nnormativas}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fvigencia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de vigencia </th>
+      <td mat-cell *matCellDef="let row"> {{row.vigencia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="version">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>
+      <td mat-cell *matCellDef="let row"> {{row.version}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orden">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Orden </th>
+      <td mat-cell *matCellDef="let row"> {{row.orden}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+      <td mat-cell *matCellDef="let row"> 
+
+
+        <!-- <button mat-flat-button color="accent">Editar
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-flat-button color="warn">Eliminar
+          <mat-icon>cancel</mat-icon>
+        </button> -->
+
+
+        <div class="button-container">
+          <button mat-raised-button class="btnEditar">
+            <mat-icon>edit</mat-icon>
+            Editar
+          </button>
+          <button mat-raised-button class="btnBorrar">      
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+        </div> <!--mat-icon-button-->
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay datos que mostrar "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+</div>

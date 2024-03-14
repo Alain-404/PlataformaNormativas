@@ -15,13 +15,24 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormControlName } from '@angular/forms';
+import { MatDatepickerModule, MatDatepickerIntl } from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-const ANGULAR_EDITOR_LOGO_URL = 'https://raw.githubusercontent.com/kolkov/angular-editor/master/docs/angular-editor-logo.png?raw=true'
+
+
+import {Inject, OnInit} from '@angular/core';
+import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
+import 'moment/locale/fr';
 
 
 @Component({
   selector: 'app-form-registrar-publicacion',
   standalone: true,
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    provideMomentDateAdapter(),],
   imports: [FormsModule,
     MatFormFieldModule,
     MatIconModule,
@@ -30,45 +41,35 @@ const ANGULAR_EDITOR_LOGO_URL = 'https://raw.githubusercontent.com/kolkov/angula
     MatInputModule, 
     HttpClientModule, AngularEditorModule,
     MatButtonModule,
-    CommonModule,],
+    MatSlideToggleModule,
+    CommonModule,
+    MatDatepickerModule],
   templateUrl: './form-registrar-publicacion.component.html',
   styleUrl: './form-registrar-publicacion.component.scss'
 })
 export class FormRegistrarPublicacionComponent {
 
-  angularEditorLogo = `<img alt="angular editor logo" src="${ANGULAR_EDITOR_LOGO_URL}">`;
-  htmlContent = '';
-
-  proceso = new FormControl('');
-  gerencia = new FormControl('');
-  perfil = new FormControl('');
-  procesoList: string[] = ["Gestión de Recursos Humanos", "Control de Inventarios", "Gestión de Proyectos", "Desarrollo de Productos", "Control de Calidad"];
-  gerenciaList: string[] = ["Oficina Central", "Oficina Regional Norte", "Oficina Regional Sur", "Oficina Regional Este", "Oficina Regional Oeste"];
-  perfilList: string[] = ["Administrador", "Usuario", "Desarrollador", "Analista", "Gerente", "Supervisor"];
-
+  //angularEditorLogo = `<img alt="angular editor logo" src="${ANGULAR_EDITOR_LOGO_URL}">`;
+  //Editor = '';
   myForm: FormGroup;
 
-
-
   constructor(
+    private _adapter: DateAdapter<any>,
+  private _intl: MatDatepickerIntl,
+  @Inject(MAT_DATE_LOCALE) private _locale: string,
+
+
+
+
     public fb: FormBuilder
+
   ) {
     this.myForm = this.fb.group({
-      procesoNormativa: ['', [Validators.required]],
-      gerenciaNormativa: [],
-      perfilNormativa: [],
-      nombreNormativa : ['', [Validators.required, Validators.minLength(5)]],
-      versionNormativa : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(15)]],
-      vigencia: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
-      palabraClave: ['', [Validators.required, Validators.minLength(3)]],
-      contactoEmail: ['', [Validators.required, Validators.email]],
-      archivo: [],
-      objetivoNormativa: ['', [Validators.required, Validators.minLength(5)]],
+      
+      titulo : ['', [Validators.required, Validators.minLength(5)]],
+      fpublicacion: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      textEditor: ['', [Validators.required, Validators.minLength(5)]],
     });
-  }
-
-  pdfInputChange(fileInputEvent: any) {
-    console.log(fileInputEvent.target.files[0]);
   }
 
   procesar(){
@@ -124,6 +125,9 @@ export class FormRegistrarPublicacionComponent {
 };
 
 
+getDateFormatString(): string {
+  return 'DD/MM/YYYY';
+}
 
 }
 

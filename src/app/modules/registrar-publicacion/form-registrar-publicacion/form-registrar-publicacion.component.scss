@@ -1,11 +1,6 @@
 .card {
-    width: 90%;
+  width: 98%;
 }
-
-
-.chip-list {
-    width: 100%;
-  }
 
 .fieldform {
     width: 100%;
@@ -43,9 +38,6 @@ section {
     justify-content: center;
     width: 120px;
   }
-  .hint {
-    color: #f02121; 
-  }
 
   .mat-form-field {
     .mat-form-field-subscript-wrapper {
@@ -56,3 +48,20 @@ section {
     }
 }
 
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edit {
+  margin-bottom: 30px;
+  height: 300px;
+}
+
+.deslizable {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListPublicacionComponent } from '../administrar-publicacion/list-publicacion/list-publicacion.component';
-
+import { AdministrarPublicacionComponent } from './administrar-publicacion.component';
 
 const routes: Routes = [
+  {path: '', component: AdministrarPublicacionComponent, canActivate:[authGuard]},
   {path: 'list', component: ListPublicacionComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
 ];
@@ -16,7 +17,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ListPublicacionComponent,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

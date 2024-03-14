@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { ListNormativaComponent } from './list-normativa/list-normativa.component';
 import { EditNormativaComponent } from './edit-normativa/edit-normativa.component';
+import { AdministrarNormativaComponent } from './administrar-normativa.component';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
+  {path: '', component: AdministrarNormativaComponent, canActivate:[authGuard]},
   {path: 'list', component: ListNormativaComponent, canActivate:[authGuard]},
 
 
@@ -17,12 +19,10 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [],
+  declarations: [  ],
   imports: [
     CommonModule,
     FormsModule,
-    ListNormativaComponent,
-    EditNormativaComponent,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormNormativaComponent } from './form-normativa/form-normativa.component';
 import { FormsModule } from '@angular/forms';
+import { RegistrarNormativaComponent } from './registrar-normativa.component';
 
 const routes: Routes = [
+  {path: '', component: RegistrarNormativaComponent, canActivate:[authGuard]},
   {path: 'registro', component: FormNormativaComponent, canActivate:[authGuard]},
 
   //{path: 'edit', component: ListUserComponent},

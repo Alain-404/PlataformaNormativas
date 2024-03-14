@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+ 
+  .mat-column-nro {
+    max-width: 50px;
+  
+  }
+
+  .mat-column-descripcion {
+    max-width: 450px;
+  }
+
+  .mat-column-area {
+    max-width: 120px;
+  }
+  
+  .btnEditar {
+    background-color: rgb(131, 233, 170);
+    color: rgb(0, 0, 0);
+    font-size: 11px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Esto colocará los botones al extremo de la línea */
+  }
+  
+  .btnEditar {
+    background-color: rgb(131, 233, 170);
+    color: rgb(0, 0, 0);
+    font-size: 11px;
+    padding: 10px;
+  }
+  
+  .btnBorrar {
+    background-color: rgb(240, 134, 134);
+    color: rgb(0, 0, 0);
+    font-size: 11px;
+    padding: 10px;
+  }

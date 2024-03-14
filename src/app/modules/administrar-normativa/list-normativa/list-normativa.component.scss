@@ -1,58 +1,67 @@
-.card {
-    width: 90%;
+// .size {
+//   width: 98%;
+// }
+
+// .sizen {
+//   width: 100%;
+//   padding: 0.8%;
+//   // margin-bottom: 5%;
+// }
+
+
+// .contenedorBusqueda {
+// background-color: rgb(169, 203, 206);
+// padding-top: 2%;
+// padding-bottom: 2%;
+// }
+
+
+table {
+  width: 100%;
 }
 
-
-.chip-list {
-    width: 100%;
-  }
-
-.fieldform {
-    width: 100%;
-    margin-bottom: 0.8%;
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
 }
 
-section {
-    display: table;
-  }
-  
-  .example-label {
-    display: table-cell;
-    font-size: 14px;
-    margin-left: 8px;
-    min-width: 120px;
-  }
-  
-  .example-button-row {
-    display: table-cell;
-    max-width: 600px;
-  }
-  
-  .example-button-row .mat-mdc-button-base {
-    margin: 8px 8px 8px 0;
-  }
-  
-  .example-flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .example-button-container {
-    display: flex;
-    justify-content: center;
-    width: 120px;
-  }
-  .hint {
-    color: #f02121; 
-  }
+// td, th {
+//   width: 12.5%;
+// }
 
-  .mat-form-field {
-    .mat-form-field-subscript-wrapper {
-        .mat-error {
-            color: red;
-            font-size: 12px; 
-        }
-    }
+.mat-column-nro,
+.mat-column-version,
+.mat-column-orden {
+  max-width: 50px;
+
+}
+
+.mat-column-tipo,
+.mat-column-fvigencia,
+.mat-column-acciones {
+  max-width: 100px;
+
+}
+
+.mat-column-area {
+  max-width: 120px;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Esto colocará los botones al extremo de la línea */
+}
+
+.btnEditar {
+  background-color: rgb(131, 233, 170);
+  color: rgb(0, 0, 0);
+  font-size: 11px;
+  padding: 10px;
+}
+
+.btnBorrar {
+  background-color: rgb(240, 134, 134);
+  color: rgb(0, 0, 0);
+  font-size: 11px;
+  padding: 10px;
 }
 

@@ -1,0 +1,30 @@
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Esto colocará los botones al extremo de la línea */
+  }
+  
+  .btnAdd {
+    background-color: rgb(8, 130, 28);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    padding: 10px;
+    width: 15em;
+    height: 3em;
+    margin-left: 5px;
+  }
+  
+  .cuadrotexto{
+    width: 40%;
+  }
+  .divisor {
+    margin-bottom: 20px;
+  }
+
+  .size {
+    width: 98%;
+  }
+  
+  .sizen {
+    width: 100%;
+    padding: 0.8%;
+  }

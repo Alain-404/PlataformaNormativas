@@ -34,6 +34,15 @@ const routes: Routes = [
       { path: 'AdministrarReportesNormativas', loadChildren: () => import('../administrar-reportes-normativas/administrar-reportes-normativas.module').then(m => m.AdministrarReportesNormativasModule), canActivate:[authGuard]},
       { path: 'ControlAccesoUsuarios', loadChildren: () => import('../control-acceso-usuarios/control-acceso-usuarios.module').then(m => m.ControlAccesoUsuariosModule), canActivate:[authGuard]},
 
+
+      { path: 'Inicio', loadChildren: () => import('../usr-inicio/usr-inicio.module').then(m => m.UsrInicioModule), canActivate:[authGuard]},
+      { path: 'Favoritos', loadChildren: () => import('../usr-favoritos/usr-favoritos.module').then(m => m.UsrFavoritosModule), canActivate:[authGuard]},
+      { path: 'Procesos', loadChildren: () => import('../usr-procesos/usr-procesos.module').then(m => m.UsrProcesosModule), canActivate:[authGuard]},
+      { path: 'Normativas', loadChildren: () => import('../usr-normativas/usr-normativas.module').then(m => m.UsrNormativasModule), canActivate:[authGuard]},
+      { path: 'Guias', loadChildren: () => import('../usr-guias/usr-guias.module').then(m => m.UsrGuiasModule), canActivate:[authGuard]},
+      { path: 'Proyectos', loadChildren: () => import('../usr-proyectos/usr-proyectos.module').then(m => m.UsrProyectosModule), canActivate:[authGuard]},
+      { path: 'ListaReportes', loadChildren: () => import('../usr-lreportes/usr-lreportes.module').then(m => m.UsrLreportesModule), canActivate:[authGuard]},
+
       //{ path: 'RegistarNormativa', loadChildren: () => import('../registrar-normativa/registrar-normativa.module').then(m => m.RegistrarNormativaModule), canActivate:[authGuard]},
       //{ path: '', loadChildren: () => import('../app/modules/user/user.module').then(m => m.UserModule), canActivate:[authGuard]},
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

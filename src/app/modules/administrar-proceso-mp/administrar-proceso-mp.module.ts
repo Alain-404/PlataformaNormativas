@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListProcesoMpComponent } from './list-proceso-mp/list-proceso-mp.component';
+import { AdministrarProcesoMpComponent } from './administrar-proceso-mp.component';
 
 
 const routes: Routes = [
+  {path: '', component: AdministrarProcesoMpComponent, canActivate:[authGuard]},
   {path: 'list', component: ListProcesoMpComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
 ];

@@ -1,0 +1,46 @@
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Esto colocará los botones al extremo de la línea */
+  }
+  
+  .btnSave {
+    background-color: rgb(8, 44, 130);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    padding: 10px;
+    width: 16em;
+    height: 3em;
+    margin-left: 5px;
+  }
+  .btnAdd {
+    background-color: rgb(8, 130, 28);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    padding: 10px;
+    width: 12em;
+    height: 3em;
+    margin-left: 5px;
+  }
+
+  .form-label{
+    font-size: 15px;
+    margin-right: 3%; 
+    // font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  }
+  
+  .cuadrotexto{
+    width: 40%;
+  }
+  .divisor {
+    margin-bottom: 20px;
+  }
+
+  .size {
+    width: 98%;
+  }
+  
+  .sizen {
+    width: 100%;
+    padding: 0.8%;
+    // margin-bottom: 5%;
+  }

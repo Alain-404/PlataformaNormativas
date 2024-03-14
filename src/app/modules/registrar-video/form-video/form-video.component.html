@@ -1,1 +1,57 @@
-<p>form-video works!</p>
+<div class="card">
+    <div class="card-body">
+        <Form [formGroup]="myForm" (ngSubmit)="procesar()" novalidate>
+            <section class="content-header">
+                <h1>
+                    Registrar Video
+                </h1>
+            </section>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombreVideo" type="text" placeholder="Nombre del video">
+                <mat-error *ngIf="myForm.get('nombreVideo').errors && myForm.get('nombreVideo').dirty">
+                    <ng-container *ngIf="myForm.get('nombreVideo').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('nombreVideo').hasError('minlength')">
+                        Mínimo 5 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Proceso</mat-label>
+                <input matInput formControlName="procesoVideo" type="text" placeholder="Proceso">
+                <mat-error *ngIf="myForm.get('procesoVideo').errors && myForm.get('procesoVideo').dirty">
+                    <ng-container *ngIf="myForm.get('procesoVideo').hasError('required')">
+                        Este campo es requerido
+                    </ng-container>
+                    <ng-container *ngIf="myForm.get('procesoVideo').hasError('minlength')">
+                        Mínimo 3 caracteres
+                    </ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Seleccione el(los) Archivos (Máx. 10MB)</label>
+                <input #videoInput class="form-control" type="file" name="videoProceso" id="formFileMultiple" multiple
+                    onclick="this.value=null" (change)="videoInputChange($event)" accept="video/*" />
+            </div>
+
+            <mat-form-field class="fieldform" appearance="outline">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput formControlName="descripcionVideo" type="text"
+                    placeholder="Descripcion del Video" name="descripcionVideo"></textarea>
+            </mat-form-field>
+
+            <section>
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="myForm.invalid">Registrar</button>
+                    <button mat-raised-button color="accent">Cancelar</button>
+                </div>
+            </section>
+        </Form>
+    </div>
+</div>

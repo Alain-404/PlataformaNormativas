@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListTipoNormativasComponent } from '../administrar-tipo-normativas/list-tipo-normativas/list-tipo-normativas.component';
-
+import { AdministrarTipoNormativasComponent } from './administrar-tipo-normativas.component';
 
 const routes: Routes = [
+  {path: '', component: AdministrarTipoNormativasComponent, canActivate:[authGuard]},
   {path: 'list', component: ListTipoNormativasComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
 ];
@@ -16,7 +17,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ListTipoNormativasComponent,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
