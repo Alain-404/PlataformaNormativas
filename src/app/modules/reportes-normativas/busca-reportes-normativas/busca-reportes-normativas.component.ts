@@ -18,7 +18,7 @@ import {MatDatepickerModule, MatDatepickerIntl} from '@angular/material/datepick
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
-import 'moment/locale/fr';
+import 'moment/locale/es';
 
 import {AutofillMonitor} from '@angular/cdk/text-field';
 import {MatFormFieldControl} from '@angular/material/form-field';
@@ -27,11 +27,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 
+import { fechaValidator } from './fechaValidator';
+
 @Component({
   selector: 'app-busca-reportes-normativas',
   standalone: true,
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
     provideMomentDateAdapter(),],
   imports: [
     FormsModule,
@@ -78,6 +80,9 @@ export class BuscaReportesNormativasComponent {
       procesoVideo : ['', [Validators.required, Validators.minLength(3)]],
       archivo: [],
       descripcionVideo: [],
+
+
+      desde: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/), fechaValidator]], 
       
     });
 
@@ -86,6 +91,10 @@ export class BuscaReportesNormativasComponent {
       map((Oficina: string | null) => (Oficina ? this._filter(Oficina) : this.allOficinas.slice())),
     );
   }
+
+
+  
+
 
   ngOnInit() { }
   saveData(){

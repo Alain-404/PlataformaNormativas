@@ -1,141 +1,100 @@
-<div class="card">
-    <div class="card-body">
-        <Form [formGroup]="myForm" (ngSubmit)="procesar()">
-            <section class="content-header d-flex justify-content-between align-items-center">
-                <h1>
-                    Reportes de Normativas
-                </h1>
-                <div class="example-button-row">
-                    <button mat-raised-button color="accent">Guardar Reporte</button>
+<Form [formGroup]="myForm" (ngSubmit)="procesar()">
+            
+ 
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Desde</mat-label>
+
+                    <input matInput formControlName="desde" [matDatepicker]="picker"  name="buscarDesde">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="myForm.get('desde').errors && myForm.get('desde').dirty">
+                        <ng-container *ngIf="myForm.get('desde').hasError('required')">
+                            Este campo es requerido
+                        </ng-container>
+                        <ng-container *ngIf="myForm.get('desde').hasError('pattern')">
+                            El formato de fecha es incorrecto (Dia/Mes/Año)
+                        </ng-container>
+                        <!-- <ng-container *ngIf="myForm.get('desde').hasError('invalidFecha')">
+                            Solo se admite valores numericos
+                        </ng-container> -->
+                    </mat-error> 
+                </mat-form-field>s 
+                
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Hasta</mat-label>
+                    <input matInput [matDatepicker]="dphasta">
+                    <mat-datepicker-toggle matIconSuffix [for]="dphasta"
+                        placeholder="Fecha de Vigencia"></mat-datepicker-toggle>
+                    <mat-datepicker #dphasta></mat-datepicker>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table> 
+
+
+    <div class="card contenedorBusqueda">
+        <div class="container">
+            <div class="row">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <label class="form-label example-button-row">Oficina</label>
+                    </ng-container>
                 </div>
-            </section>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <div class="example-button-row">
+                            <button mat-raised-button class="btnTodos">Todos</button>
+                        </div>
+                    </ng-container>
+                </div>
 
-            <mat-divider class="divisor"></mat-divider>
+                <div class="col-9 d-flex align-items-center justify-content-center">
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline">
+                        <mat-chip-grid #chipGrid aria-label="Oficina selection">
 
-            <table class="example-full-width" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Desde</mat-label>
+                            @for (Oficina of Oficinas; track Oficina) {
+                            <mat-chip-row (removed)="remove(Oficina)">
+                                {{Oficina}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + Oficina">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                            <input placeholder="Seleccione..." #OficinaInput [formControl]="OficinaCtrl"
+                                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)" />
 
-                            <input matInput [matDatepicker]="dpdesde"> <!--[formControl]="date"-->
-                            <mat-datepicker-toggle matIconSuffix [for]="dpdesde"
-                                placeholder="Fecha de Vigencia"></mat-datepicker-toggle>
-                            <mat-datepicker #dpdesde></mat-datepicker>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                @for (Oficina of filteredOficinas | async; track Oficina) {
+                                <mat-option [value]="Oficina">{{Oficina}}</mat-option>
+                                }
+                            </mat-autocomplete>
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
 
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width" appearance="outline">
-                            <mat-label>Hasta</mat-label>
-                            <input matInput [matDatepicker]="dphasta"> <!--[formControl]="date"-->
-                            <mat-datepicker-toggle matIconSuffix [for]="dphasta"
-                                placeholder="Fecha de Vigencia"></mat-datepicker-toggle>
-                            <mat-datepicker #dphasta></mat-datepicker>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
-
-            <!-- <div class="card">
-            <div class="container">
-                <div class="row">
-                    <div class="col-1 d-flex align-items-center justify-content-center">
-                        <ng-container matColumnDef="position">
-                          <label class="form-label example-button-row">Oficina</label>
-                        </ng-container>
-                      </div>
-                      <div class="col-1 d-flex align-items-center justify-content-center">
-                        <ng-container matColumnDef="position">
-                            <div class="example-button-row">
-                                <button mat-raised-button class="btnTodos">Todos</button>
-                            </div>
-                        </ng-container>
-                    </div>
-                    <div class="col-9 d-flex align-items-center justify-content-center">
-                        <ng-container matColumnDef="position">
-                            <mat-form-field class="fieldform" appearance="outline">
-                                <mat-select [formControl]="proceso" multiple ormControlName="Oficina" type="text"
-                                    placeholder="Seleccione ..." required class="example-button-row">
-                                    @for (topping of procesoList; track topping) {
-                                    <mat-option [value]="topping">{{topping}}</mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
-                        </ng-container>
-                    </div>
-                    <div class="col-1 d-flex align-items-center justify-content-center">
-                        <ng-container matColumnDef="position">
-                            <div class="example-button-row">
-                            <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <div class="example-button-row">
+                            <button mat-mini-fab color="warn">
                                 <mat-icon>cancel</mat-icon>
-                            </button></div>
-                        </ng-container>
-                    </div>
+                            </button>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
-        </div> -->
-
-
-            <div class="card contenedorBusqueda">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-1 d-flex align-items-center justify-content-center">
-                            <ng-container matColumnDef="position">
-                                <label class="form-label example-button-row">Oficina</label>
-                            </ng-container>
-                        </div>
-                        <div class="col-1 d-flex align-items-center justify-content-center">
-                            <ng-container matColumnDef="position">
-                                <div class="example-button-row">
-                                    <button mat-raised-button class="btnTodos">Todos</button>
-                                </div>
-                            </ng-container>
-                        </div>
-
-                        <div class="col-9 d-flex align-items-center justify-content-center">
-                            <mat-form-field class="fieldform fieldformChip" appearance="outline">
-                                <mat-chip-grid #chipGrid aria-label="Oficina selection">
-                                    @for (Oficina of Oficinas; track Oficina) {
-                                    <mat-chip-row (removed)="remove(Oficina)">
-                                        {{Oficina}}
-                                        <button matChipRemove [attr.aria-label]="'remove ' + Oficina">
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                    </mat-chip-row>
-                                    }
-                                    <input placeholder="Seleccione..." #OficinaInput [formControl]="OficinaCtrl"
-                                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                        (matChipInputTokenEnd)="add($event)" />
-
-                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                                        @for (Oficina of filteredOficinas | async; track Oficina) {
-                                        <mat-option [value]="Oficina">{{Oficina}}</mat-option>
-                                        }
-                                    </mat-autocomplete>
-                                </mat-chip-grid>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-1 d-flex align-items-center justify-content-center">
-                            <ng-container matColumnDef="position">
-                                <div class="example-button-row">
-                                    <button mat-mini-fab color="warn">
-                                        <mat-icon>cancel</mat-icon>
-                                    </button>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <section>
-                <div class="example-button-row">
-                    <button mat-raised-button color="primary" type="submit">Buscar</button>
-                </div>
-            </section>
-        </Form>
+        </div>
     </div>
-</div>
+
+    <section>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" type="submit">Buscar</button>
+        </div>
+    </section>
+</Form>

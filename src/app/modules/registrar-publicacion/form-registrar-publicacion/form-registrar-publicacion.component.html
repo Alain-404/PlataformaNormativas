@@ -32,7 +32,7 @@
                     <ng-container *ngIf="myForm.get('fpublicacion').hasError('required')">
                         Este campo es requerido
                     </ng-container>
-                    <ng-container *ngIf="myForm.get('fpublicacion').hasError('pattern')">
+                    <ng-container *ngIf="myForm.get('fpublicacion').hasError('invalidDate')">
                         El formato de fecha es incorrecto (Dia/Mes/Año)
                     </ng-container>
                 </mat-error>

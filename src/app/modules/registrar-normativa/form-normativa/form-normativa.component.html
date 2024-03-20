@@ -89,8 +89,7 @@
 
 <mat-form-field class="fieldform" appearance="outline">
     <mat-label>Fecha de Vigencia</mat-label>
-    <input matInput formControlName="vigencia" [matDatepicker]="picker"
-        placeholder="Fecha de vigencia" name="vigenciaNormativa">
+    <input matInput formControlName="vigencia" [matDatepicker]="picker" placeholder="Fecha de vigencia" name="vigenciaNormativa">
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="myForm.get('vigencia').errors && myForm.get('vigencia').dirty">

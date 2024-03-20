@@ -24,14 +24,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {Inject, OnInit} from '@angular/core';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
-import 'moment/locale/fr';
+import 'moment/locale/es';
+//import 'moment/locale/fr';
 
 
 @Component({
   selector: 'app-form-registrar-publicacion',
   standalone: true,
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-PE'},
     provideMomentDateAdapter(),],
   imports: [FormsModule,
     MatFormFieldModule,
@@ -58,24 +59,30 @@ export class FormRegistrarPublicacionComponent {
   private _intl: MatDatepickerIntl,
   @Inject(MAT_DATE_LOCALE) private _locale: string,
 
-
-
-
     public fb: FormBuilder
 
   ) {
     this.myForm = this.fb.group({
       
       titulo : ['', [Validators.required, Validators.minLength(5)]],
-      fpublicacion: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      //fpublicacion: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      fpublicacion: ['', [Validators.required, this.customDateValidator()]],
       textEditor: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
-
-  procesar(){
-    //console.log(this.normativa);
+  customDateValidator() {
+    return (control) => {
+      const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/;
+      if (!dateRegex.test(control.value)) {
+        return { 'invalidDate': true };
+      }
+      return null;
+    };
   }
-
+  
+  procesar(){
+      //console.log(this.normativa);
+    }
   config: AngularEditorConfig = {
     editable: true,
       spellcheck: true,

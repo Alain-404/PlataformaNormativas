@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UsrProcesosComponent } from './usr-procesos.component';
 import { ListProcesosComponent } from './list-procesos/list-procesos.component';
 
+
 const routes: Routes = [
   {path: '', component: UsrProcesosComponent, canActivate:[authGuard]},
   {path: 'list', component: ListProcesosComponent, canActivate:[authGuard]},

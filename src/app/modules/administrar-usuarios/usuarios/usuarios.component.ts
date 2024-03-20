@@ -52,7 +52,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 }
 
 @Component({
-  selector: 'app-list-control-usuarios',
+  selector: 'app-usuarios',
   standalone: true,
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}],
   imports: [
@@ -61,10 +61,10 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
     MatInputModule, MatPaginatorModule,
     MatFormFieldModule, MatTableModule, MatSortModule
   ],
-  templateUrl: './list-control-usuarios.component.html',
-  styleUrl: './list-control-usuarios.component.scss'
+  templateUrl: './usuarios.component.html',
+  styleUrl: './usuarios.component.scss'
 })
-export class ListControlUsuariosComponent {
+export class UsuariosComponent {
 
   displayedColumns: string[] = ['nro', 'usuario', 'estado', 'opciones'];
   dataSource: MatTableDataSource<UserData>;

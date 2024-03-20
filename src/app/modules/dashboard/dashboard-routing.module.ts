@@ -43,6 +43,8 @@ const routes: Routes = [
       { path: 'Proyectos', loadChildren: () => import('../usr-proyectos/usr-proyectos.module').then(m => m.UsrProyectosModule), canActivate:[authGuard]},
       { path: 'ListaReportes', loadChildren: () => import('../usr-lreportes/usr-lreportes.module').then(m => m.UsrLreportesModule), canActivate:[authGuard]},
 
+      { path: 'AdmUsuarios', loadChildren: () => import('../administrar-usuarios/administrar-usuarios.module').then(m => m.AdministrarUsuariosModule), canActivate:[authGuard]},
+
       //{ path: 'RegistarNormativa', loadChildren: () => import('../registrar-normativa/registrar-normativa.module').then(m => m.RegistrarNormativaModule), canActivate:[authGuard]},
       //{ path: '', loadChildren: () => import('../app/modules/user/user.module').then(m => m.UserModule), canActivate:[authGuard]},
       //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },

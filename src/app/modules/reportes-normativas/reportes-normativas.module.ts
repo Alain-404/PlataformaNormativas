@@ -5,9 +5,11 @@ import { authGuard } from '../../guards/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { ListReportesNormativasComponent } from './list-reportes-normativas/list-reportes-normativas.component';
 import { BuscaReportesNormativasComponent } from './busca-reportes-normativas/busca-reportes-normativas.component';
+import { ReportesNormativasComponent } from './reportes-normativas.component';
 
 
 const routes: Routes = [
+  {path: '', component: ReportesNormativasComponent, canActivate:[authGuard]},
   {path: 'busca', component: BuscaReportesNormativasComponent, canActivate:[authGuard]},
   {path: 'list', component: ListReportesNormativasComponent, canActivate:[authGuard]},
   //{path: 'edit', component: ListUserComponent},
@@ -18,6 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReportesNormativasComponent,
     ListReportesNormativasComponent,
     BuscaReportesNormativasComponent,
     RouterModule.forChild(routes)

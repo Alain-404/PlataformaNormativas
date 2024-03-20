@@ -63,7 +63,8 @@ export class FormNormativaComponent implements OnInit {
       perfilNormativa: [],
       nombreNormativa : ['', [Validators.required, Validators.minLength(5)]],
       versionNormativa : ['', [Validators.required, Validators.minLength(1), Validators.maxLength(15)]],
-      vigencia: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      vigencia: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]], 
+      //vigencia: ['', [Validators.required, this.customDateValidator()]], 
       palabraClave: ['', [Validators.required, Validators.minLength(3)]],
       contactoEmail: ['', [Validators.required, Validators.email]],
       archivo: [],
@@ -81,6 +82,16 @@ export class FormNormativaComponent implements OnInit {
   saveData(){
     console.log(this.myForm.value);
   }
+
+  // customDateValidator() {
+  //   return (control) => {
+  //     const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/(19|20)\d{2}$/;
+  //     if (!dateRegex.test(control.value)) {
+  //       return { 'invalidDate': true };
+  //     }
+  //     return null;
+  //   };
+  // }
 
 procesar(){
     console.log(this.normativa);

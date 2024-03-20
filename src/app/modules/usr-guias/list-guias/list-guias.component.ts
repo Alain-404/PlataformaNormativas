@@ -9,6 +9,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { Output, EventEmitter } from '@angular/core';
+import { VisualizarGuiasComponent } from '../visualizar-guias/visualizar-guias.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface UserData {
   nro: string;
@@ -67,15 +70,27 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   templateUrl: './list-guias.component.html',
   styleUrl: './list-guias.component.scss'
 })
+
 export class ListGuiasComponent {
 
+
+  openPdfModal(): void {
+    const dialogRef = this.dialog.open(VisualizarGuiasComponent, {
+      width: '80%',
+      height: '90%'
+    });
+  }
+
+
+  // pdfUrl = 'assets/doc/prueba.pdf';
   displayedColumns: string[] = ['star','nro', 'nnormativa', 'fvigencia', 'version', 'acciones'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
     const users = Array.from({length: 200}, (_, k) => createNewUser(k + 1));
 
@@ -95,6 +110,13 @@ export class ListGuiasComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  // @Output() abrirPDF = new EventEmitter<void>();
+
+  // abrirVisorPDF() {
+  //   this.abrirPDF.emit();
+  // }
+
 }
 function createNewUser(id: number): UserData {
   return {
