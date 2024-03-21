@@ -1,87 +1,87 @@
 .card {
-    width: 98%;
+  width: 98%;
 }
 
 
 .fieldform {
-    width: 100%;
-    margin-bottom: 0.8%;
+  width: 100%;
+  margin-bottom: 0.8%;
 }
 
 .fieldformChip {
-  margin-bottom: -2.5%;
+margin-bottom: -2.5%;
 }
 
 
 section {
-    display: table;
-  }
-  
-  .example-label {
-    display: table-cell;
-    font-size: 14px;
-    margin-left: 8px;
-    min-width: 120px;
-  }
-  
-  .example-button-row {
-    display: table-cell;
-    max-width: 600px;
-  }
-  
-  .example-button-row .mat-mdc-button-base {
-    margin: 8px 8px 8px 0;
-  }
-  
-  .example-flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .example-button-container {
-    display: flex;
-    justify-content: center;
-    width: 120px;
-  }
+  display: table;
+}
 
-  .mat-form-field {
-    .mat-form-field-subscript-wrapper {
-        .mat-error {
-            color: red;
-            font-size: 12px; 
-        }
-    }
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.mat-form-field {
+  .mat-form-field-subscript-wrapper {
+      .mat-error {
+          color: red;
+          font-size: 12px; 
+      }
+  }
 }
 
 .divisor {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .content-header {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center;
-  }
-  
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+}
+
 .form-label{
-    font-size: 16px;
-    margin-left: 8px;
-    min-width: 120px;  
-  }
+  font-size: 16px;
+  margin-left: 8px;
+  min-width: 120px;  
+}
 
 .btnTodos{
-  width: 100%;
-  background-color: rgb(0, 172, 214);
-  color: rgb(255, 255, 255);
+width: 100%;
+background-color: rgb(0, 172, 214);
+color: rgb(255, 255, 255);
 }
 
 .example-chip-list {
-  width: 100%;
+width: 100%;
 }
 
 .contenedorBusqueda {
-  background-color: rgb(169, 203, 206);
-  padding-top: 2%;
-  padding-bottom: 2%;
+background-color: rgb(169, 203, 206);
+padding-top: 2%;
+padding-bottom: 2%;
 }

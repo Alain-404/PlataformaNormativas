@@ -1,1 +1,100 @@
-<p>Hola</p>
+<!-- <Form [formGroup]="myForm" (ngSubmit)="procesar()"> -->
+            
+ 
+    <!-- <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Desde</mat-label>
+
+                    <input matInput formControlName="desde" [matDatepicker]="picker"  name="buscarDesde">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="myForm.get('desde').errors && myForm.get('desde').dirty">
+                        <ng-container *ngIf="myForm.get('desde').hasError('required')">
+                            Este campo es requerido
+                        </ng-container>
+                        <ng-container *ngIf="myForm.get('desde').hasError('pattern')">
+                            El formato de fecha es incorrecto (Dia/Mes/Año)
+                        </ng-container>
+                    </mat-error> 
+                </mat-form-field> 
+                
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Hasta</mat-label>
+                    <input matInput [matDatepicker]="dphasta">
+                    <mat-datepicker-toggle matIconSuffix [for]="dphasta"
+                        placeholder="Fecha de Vigencia"></mat-datepicker-toggle>
+                    <mat-datepicker #dphasta></mat-datepicker>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>  -->
+
+<Form [formGroup]="myForm" (ngSubmit)="procesar()">
+    <div class="card contenedorBusqueda">
+        <div class="container">
+            <div class="row">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <label class="form-label example-button-row">Oficina</label>
+                    </ng-container>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <div class="example-button-row">
+                            <button mat-raised-button class="btnTodos" (click)="toggleTodos(); OficinaCtrl.disable()" >Todos</button>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="col-9 d-flex align-items-center justify-content-center">
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline" >
+                        <mat-chip-grid #chipGrid aria-label="Oficina selection" [formControl]="OficinaCtrl">
+
+                            @for (Oficina of Oficinas; track Oficina) {
+                            <mat-chip-row (removed)="remove(Oficina)">
+                                {{Oficina}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + Oficina">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                            <input placeholder="Seleccione..." #OficinaInput 
+                                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)" />
+
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    @for (Oficina of filteredOficinas | async; track Oficina) {
+                                        <mat-option *ngIf="!Oficinas.includes(Oficina)" [value]="Oficina">
+                                            {{Oficina}}
+                                          </mat-option>
+                                    }
+                                </mat-autocomplete>
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="position">
+                        <div class="example-button-row">
+                            <button mat-mini-fab color="warn" (click)="Oficinas=[]; OficinaCtrl.enable()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</Form>
+
+
+<!-- <section>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" type="submit">Buscar</button>
+        </div>
+    </section> -->

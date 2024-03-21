@@ -21,7 +21,7 @@
                             Solo se admite valores numericos
                         </ng-container> -->
                     </mat-error> 
-                </mat-form-field>s 
+                </mat-form-field> 
                 
             </td>
             <td>
@@ -72,7 +72,10 @@
 
                             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                                 @for (Oficina of filteredOficinas | async; track Oficina) {
-                                <mat-option [value]="Oficina">{{Oficina}}</mat-option>
+                                    <mat-option *ngIf="!Oficinas.includes(Oficina)" [value]="Oficina">
+                                        {{Oficina}}
+                                      </mat-option>
+                                <!-- <mat-option [value]="Oficina">{{Oficina}}</mat-option> -->
                                 }
                             </mat-autocomplete>
                         </mat-chip-grid>

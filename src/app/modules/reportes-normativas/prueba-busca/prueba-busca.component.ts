@@ -1,156 +1,170 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent, MatChipListbox } from '@angular/material/chips';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { User } from './users';
-import { Fruit } from './fruit';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { startWith, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatOptionModule } from '@angular/material/core';
+import { Component, ElementRef, ViewChild, Inject, inject, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatAutocompleteModule, MatAutocomplete } from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatIconModule } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatButtonModule } from '@angular/material/button';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDatepickerModule, MatDatepickerIntl } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import 'moment/locale/es';
+import { AutofillMonitor } from '@angular/cdk/text-field';
+import { MatFormFieldControl } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 
-const user = {
-  firstName: 'Lindsey',
-  lastName: 'Broos',
-  fruits: [
-    { id: 1, name: 'lemon' },
-    { id: 4, name: 'strawberry' }]
-};
 
 @Component({
   selector: 'app-prueba-busca',
   standalone: true,
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
+    provideMomentDateAdapter(),],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatButtonModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    MatChipsModule,
     MatAutocompleteModule,
-    MatOptionModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    CommonModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatChipsModule,
+    AsyncPipe
   ],
   templateUrl: './prueba-busca.component.html',
   styleUrl: './prueba-busca.component.scss'
 })
 export class PruebaBuscaComponent {
 
-  public selectable = true;
-  public removable = true;
-  public addOnBlur = true;
-  public userForm: FormGroup;
-  public user: User;
-  public fruits = [
-    { id: 1, name: "lemon" },
-    { id: 2, name: "lime" },
-    { id: 3, name: "orange" },
-    { id: 4, name: "strawberry" },
-    { id: 5, name: "raspberry" }
-  ];
-  public filteredFruits$: Observable<Fruit[]>;
+  myForm: FormGroup;
 
-  @ViewChild("fruitList") fruitList: MatChipListbox;
+  // formControl = new FormControl(['angular']);
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  // announcer = inject(LiveAnnouncer);
 
-  constructor(public fb: FormBuilder) {}
+  constructor(
+    private _adapter: DateAdapter<any>,
+    private _intl: MatDatepickerIntl,
+    @Inject(MAT_DATE_LOCALE) private _locale: string,
 
-  ngOnInit(): void {
-    this.user = user;
+    public fb: FormBuilder
+
+  ) {
+    this.myForm = this.fb.group({
+
+      date: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+      nombreVideo: ['', [Validators.required, Validators.minLength(5)]],
+      procesoVideo: ['', [Validators.required, Validators.minLength(3)]],
+      archivo: [],
+      descripcionVideo: [],
+
+
+      desde: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)]],
+
+    });
+
+    this.filteredOficinas = this.OficinaCtrl.valueChanges.pipe(
+      startWith(null),
+      map((Oficina: string | null) => (Oficina ? this._filter(Oficina) : this.allOficinas.slice())),
+    );
   }
 
-  public hasError = (controlName: string, errorName: string) => {
-    return this.userForm.controls[controlName].hasError(errorName);
+  ngOnInit() { }
+  saveData() {
+    console.log(this.myForm.value);
+  }
+
+  procesar() {
+    console.log(this.normativa);
+  }
+
+  normativa = {
+    nombre: '',
   };
 
-  public selectFruit(event: MatAutocompleteSelectedEvent): void {
-    if (!event.option) {
-      return;
-    }
+  videoInputChange(fileInputEvent: any) {
+    console.log(fileInputEvent.target.files[0]);
+  }
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  OficinaCtrl = new FormControl('');
+  filteredOficinas: Observable<string[]>;
+  Oficinas: string[] = [];
+  allOficinas: string[] = ["Gestión de Recursos Humanos", "Control de Inventarios", "Gestión de Proyectos", "Desarrollo de Productos", "Control de Calidad"];
 
-    const value = event.option.value;
+  categoriaCtrl = new FormControl('');
+  filteredcategoria: Observable<string[]>;
 
-    if (value && value instanceof Object && !this.user.fruits.includes(value)) {
-      this.user.fruits.push(value);
-      this.userForm.get("fruits").setValue(this.user.fruits);
-      this.userForm.get("fruitInput").setValue("");
+
+  @ViewChild('OficinaInput') OficinaInput: ElementRef<HTMLInputElement>;
+
+  announcer = Inject(LiveAnnouncer);
+
+  todosSeleccionado: boolean = false;
+
+  toggleTodos() {
+    this.todosSeleccionado = !this.todosSeleccionado;
+    if (this.todosSeleccionado) {
+      this.Oficinas = ["Todos"]; 
+    } else {
+      this.Oficinas = []; 
     }
   }
 
-  public addFruit(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    if (value.trim()) {
-      const matches = this.fruits.filter(
-        fruit => fruit.name.toLowerCase() === value
-      );
-      const formValue = this.userForm.get("fruits").value;
-      const matchesNotYetSelected =
-        formValue === null
-          ? matches
-          : matches.filter(x => !formValue.find(y => y.id === x.id));
-      if (matchesNotYetSelected.length === 1) {
-        this.user.fruits.push(matchesNotYetSelected[0]);
-        this.userForm.get("fruits").setValue(this.user.fruits);
-        this.userForm.get("fruitInput").setValue("");
-      }
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = "";
-    }
-  }
-
-  public remove(fruit: Fruit) {
-    const index = this.user.fruits.indexOf(fruit);
+  removeall(Oficina: string): void {
+    const index = this.Oficinas.indexOf(Oficina);
     if (index >= 0) {
-      this.user.fruits.splice(index, 1);
-      this.userForm.get("fruits").setValue(this.user.fruits);
-      this.userForm.get("fruitInput").setValue("");
+      this.Oficinas.splice(index, 1);
+      this.announcer.announce(`Removed ${Oficina}`);
     }
   }
 
-  public submitForm(): void {
-    console.log(this.user);
-    console.log(this.userForm.get("fruits"));
-  }
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
-  private fruitFilter(value: any): Fruit[] {
-    const filterValue =
-      value === null || value instanceof Object ? "" : value.toLowerCase();
-    const matches = this.fruits.filter(fruit =>
-      fruit.name.toLowerCase().includes(filterValue)
-    );
-    const formValue = this.userForm.get("fruits").value;
-    return formValue === null
-      ? matches
-      : matches.filter(x => !formValue.find(y => y.id === x.id));
-  }
-
-  private validateFruits(fruits: FormControl) {
-    if (fruits.value && fruits.value.length === 0) {
-      return {
-        validateFruitsArray: { valid: false }
-      };
+    if (value) {
+      this.Oficinas.push(value);
     }
 
-    return null;
+    event.chipInput!.clear();
+
+    this.OficinaCtrl.setValue(null);
   }
+
+  remove(Oficina: string): void {
+    const index = this.Oficinas.indexOf(Oficina);
+
+    if (index >= 0) {
+      this.Oficinas.splice(index, 1);
+
+      this.announcer.announce(`Removed ${Oficina}`);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.Oficinas.push(event.option.viewValue);
+    this.OficinaInput.nativeElement.value = '';
+    this.OficinaCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allOficinas.filter(Oficina => Oficina.toLowerCase().includes(filterValue));
+  }
+
+
+  isAllSelected = false;
 }
