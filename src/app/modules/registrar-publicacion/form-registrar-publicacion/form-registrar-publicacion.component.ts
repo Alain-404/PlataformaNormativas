@@ -19,14 +19,11 @@ import { MatDatepickerModule, MatDatepickerIntl } from '@angular/material/datepi
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-
-
 import {Inject, OnInit} from '@angular/core';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import 'moment/locale/es';
 //import 'moment/locale/fr';
-
 
 @Component({
   selector: 'app-form-registrar-publicacion',

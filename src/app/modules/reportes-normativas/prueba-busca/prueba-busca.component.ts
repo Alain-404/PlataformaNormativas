@@ -7,7 +7,6 @@ import { map, startWith } from 'rxjs/operators';
 import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -22,6 +21,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 
 @Component({
@@ -52,8 +52,14 @@ export class PruebaBuscaComponent {
   myForm: FormGroup;
 
   // formControl = new FormControl(['angular']);
+  OficinaCtrl = new FormControl('');
+  filteredOficinas: Observable<string[]>;
+  Oficinas: string[] = [];
+  allOficinas: string[] = ["Gestión de Recursos Humanos", "Control de Inventarios", "Gestión de Proyectos", "Desarrollo de Productos", "Control de Calidad"];
 
-  // announcer = inject(LiveAnnouncer);
+  // categoriaCtrl = new FormControl('');
+  // filteredcategoria: Observable<string[]>;
+  announcer = inject(LiveAnnouncer);
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -95,22 +101,11 @@ export class PruebaBuscaComponent {
     nombre: '',
   };
 
-  videoInputChange(fileInputEvent: any) {
-    console.log(fileInputEvent.target.files[0]);
-  }
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  OficinaCtrl = new FormControl('');
-  filteredOficinas: Observable<string[]>;
-  Oficinas: string[] = [];
-  allOficinas: string[] = ["Gestión de Recursos Humanos", "Control de Inventarios", "Gestión de Proyectos", "Desarrollo de Productos", "Control de Calidad"];
-
-  categoriaCtrl = new FormControl('');
-  filteredcategoria: Observable<string[]>;
 
 
   @ViewChild('OficinaInput') OficinaInput: ElementRef<HTMLInputElement>;
 
-  announcer = Inject(LiveAnnouncer);
+  // announcer = Inject(LiveAnnouncer);
 
   todosSeleccionado: boolean = false;
 
@@ -121,26 +116,6 @@ export class PruebaBuscaComponent {
     } else {
       this.Oficinas = []; 
     }
-  }
-
-  removeall(Oficina: string): void {
-    const index = this.Oficinas.indexOf(Oficina);
-    if (index >= 0) {
-      this.Oficinas.splice(index, 1);
-      this.announcer.announce(`Removed ${Oficina}`);
-    }
-  }
-
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    if (value) {
-      this.Oficinas.push(value);
-    }
-
-    event.chipInput!.clear();
-
-    this.OficinaCtrl.setValue(null);
   }
 
   remove(Oficina: string): void {
@@ -159,12 +134,18 @@ export class PruebaBuscaComponent {
     this.OficinaCtrl.setValue(null);
   }
 
+  onInputKeydown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    if (event.key && event.key !== 'Enter') {
+        input.value = '';
+        event.preventDefault(); 
+    }
+}
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
+    
     return this.allOficinas.filter(Oficina => Oficina.toLowerCase().includes(filterValue));
+    
   }
-
-
   isAllSelected = false;
 }

@@ -36,7 +36,6 @@
         </tr>
     </table> 
 
-
     <div class="card contenedorBusqueda">
         <div class="container">
             <div class="row">
@@ -48,44 +47,193 @@
                 <div class="col-1 d-flex align-items-center justify-content-center">
                     <ng-container matColumnDef="position">
                         <div class="example-button-row">
-                            <button mat-raised-button class="btnTodos">Todos</button>
+                            <button mat-raised-button class="btnTodosOficina" (click)="toggleOficinaTodos(); OficinaCtrl.disable()" >Todos</button>
                         </div>
                     </ng-container>
                 </div>
 
                 <div class="col-9 d-flex align-items-center justify-content-center">
-                    <mat-form-field class="fieldform fieldformChip" appearance="outline">
-                        <mat-chip-grid #chipGrid aria-label="Oficina selection">
-
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline" >
+                        <mat-chip-grid #chipGrid aria-label="Oficina selection" [formControl]="OficinaCtrl">
                             @for (Oficina of Oficinas; track Oficina) {
-                            <mat-chip-row (removed)="remove(Oficina)">
+                            <mat-chip-row (removed)="removeOficina(Oficina)">
                                 {{Oficina}}
                                 <button matChipRemove [attr.aria-label]="'remove ' + Oficina">
                                     <mat-icon>cancel</mat-icon>
                                 </button>
                             </mat-chip-row>
                             }
-                            <input placeholder="Seleccione..." #OficinaInput [formControl]="OficinaCtrl"
+                            <input #OficinaInput 
                                 [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                (matChipInputTokenEnd)="add($event)" />
+                                (keydown)="onInputKeydownOficina($event)" />
 
-                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                                @for (Oficina of filteredOficinas | async; track Oficina) {
-                                    <mat-option *ngIf="!Oficinas.includes(Oficina)" [value]="Oficina">
-                                        {{Oficina}}
-                                      </mat-option>
-                                <!-- <mat-option [value]="Oficina">{{Oficina}}</mat-option> -->
-                                }
-                            </mat-autocomplete>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedOficina($event)">
+                                    @for (Oficina of filteredOficinas | async; track Oficina) {
+                                        <mat-option *ngIf="!Oficinas.includes(Oficina)" [value]="Oficina">
+                                            {{Oficina}}
+                                          </mat-option>
+                                    }
+                                </mat-autocomplete>
                         </mat-chip-grid>
                     </mat-form-field>
+
                 </div>
 
                 <div class="col-1 d-flex align-items-center justify-content-center">
                     <ng-container matColumnDef="position">
                         <div class="example-button-row">
-                            <button mat-mini-fab color="warn">
+                            <button mat-mini-fab color="warn" (click)="Oficinas=[]; OficinaCtrl.enable()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="cat">
+                        <label class="form-label example-button-row">Categoria</label>
+                    </ng-container>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="cat">
+                        <div class="example-button-row">
+                            <button mat-raised-button class="btnTodosCategoria" (click)="toggleCategoriaTodos(); CategoriaCtrl.disable()" >Todos</button>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-9 d-flex align-items-center justify-content-center">
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline" >
+                        <mat-chip-grid #chipGridC aria-label="Categoria selection" [formControl]="CategoriaCtrl">
+                            @for (Categoria of Categorias; track Categoria) {
+                            <mat-chip-row (removed)="removeCategoria(Categoria)">
+                                {{Categoria}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + Categoria">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                            <input #CategoriaInput 
+                                [matChipInputFor]="chipGridC" [matAutocomplete]="autoCatergoria"
+                                (keydown)="onInputKeydownCategoria($event)" />
+                                <mat-autocomplete #autoCatergoria="matAutocomplete" (optionSelected)="selectedCategoria($event)">
+                                    @for (Categoria of filteredCategorias | async; track Categoria) {
+                                        <mat-option *ngIf="!Categorias.includes(Categoria)" [value]="Categoria">
+                                            {{Categoria}}
+                                          </mat-option>
+                                    }
+                                </mat-autocomplete>
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="cat">
+                        <div class="example-button-row">
+                            <button mat-mini-fab color="warn" (click)="Categorias=[]; CategoriaCtrl.enable()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="Gerencia">
+                        <label class="form-label example-button-row">Gerencia</label>
+                    </ng-container>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="Gerencia">
+                        <div class="example-button-row">
+                            <button mat-raised-button class="btnTodosGerencia" (click)="toggleGerenciaTodos(); GerenciaCtrl.disable()" >Todos</button>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-9 d-flex align-items-center justify-content-center">
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline" >
+                        <mat-chip-grid #chipGridG aria-label="Gerencia selection" [formControl]="GerenciaCtrl">
+                            @for (Gerencia of Gerencias; track Gerencia) {
+                            <mat-chip-row (removed)="removeGerencia(Gerencia)">
+                                {{Gerencia}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + Gerencia">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                            <input #GerenciaInput 
+                                [matChipInputFor]="chipGridG" [matAutocomplete]="autoGerencia"
+                                (keydown)="onInputKeydownGerencia($event)" />
+                                <mat-autocomplete #autoGerencia="matAutocomplete" (optionSelected)="selectedGerencia($event)">
+                                    @for (Gerencia of filteredGerencias | async; track Gerencia) {
+                                        <mat-option *ngIf="!Gerencias.includes(Gerencia)" [value]="Gerencia">
+                                            {{Gerencia}}
+                                          </mat-option>
+                                    }
+                                </mat-autocomplete>
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="cat">
+                        <div class="example-button-row">
+                            <button mat-mini-fab color="warn" (click)="Gerencias=[]; GerenciaCtrl.enable()">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="Cargo">
+                        <label class="form-label example-button-row">Cargo</label>
+                    </ng-container>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="Cargo">
+                        <div class="example-button-row">
+                            <button mat-raised-button class="btnTodosCargo" (click)="toggleCargoTodos(); CargoCtrl.disable()" >Todos</button>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-9 d-flex align-items-center justify-content-center">
+                    <mat-form-field class="fieldform fieldformChip" appearance="outline" >
+                        <mat-chip-grid #chipGridCar aria-label="Cargo selection" [formControl]="CargoCtrl">
+                            @for (Cargo of Cargos; track Cargo) {
+                            <mat-chip-row (removed)="removeCargo(Cargo)">
+                                {{Cargo}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + Cargo">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip-row>
+                            }
+                            <input #CargoInput 
+                                [matChipInputFor]="chipGridCar" [matAutocomplete]="autoCargo"
+                                (keydown)="onInputKeydownCargo($event)" />
+
+                                <mat-autocomplete #autoCargo="matAutocomplete" (optionSelected)="selectedCargo($event)">
+                                    @for (Cargo of filteredCargos | async; track Cargo) {
+                                        <mat-option *ngIf="!Cargos.includes(Cargo)" [value]="Cargo">
+                                            {{Cargo}}
+                                          </mat-option>
+                                    }
+                                </mat-autocomplete>
+                        </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <ng-container matColumnDef="cat">
+                        <div class="example-button-row">
+                            <button mat-mini-fab color="warn" (click)="Cargos=[]; CargoCtrl.enable()">
                                 <mat-icon>cancel</mat-icon>
                             </button>
                         </div>

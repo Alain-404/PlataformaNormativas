@@ -4,15 +4,17 @@ import { MatDialogContent } from '@angular/material/dialog';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
+
 @Component({
-  selector: 'app-visualizar-guias',
+  selector: 'app-visualizar-proyectos',
   standalone: true,
   imports: [MatDialogContent, NgxExtendedPdfViewerModule],
-  templateUrl: './visualizar-guias.component.html',
-  styleUrl: './visualizar-guias.component.scss'
+  templateUrl: './visualizar-proyectos.component.html',
+  styleUrl: './visualizar-proyectos.component.scss'
 })
-export class VisualizarGuiasComponent {
-  constructor(public dialogRef: MatDialogRef<VisualizarGuiasComponent>) {
+export class VisualizarProyectosComponent {
+
+  constructor(public dialogRef: MatDialogRef<VisualizarProyectosComponent>) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
    }
 
@@ -33,7 +35,5 @@ export class VisualizarGuiasComponent {
   handleMouseRightClick(event: MouseEvent) {
     event.preventDefault();
   }
-
-
 
 }

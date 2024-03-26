@@ -9,6 +9,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { VisualizarFavoritosComponent } from '../visualizar-favoritos/visualizar-favoritos.component';
+
+import { MatDialog } from '@angular/material/dialog';
 
 export interface UserData {
   nro: string;
@@ -96,13 +99,21 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   styleUrl: './list-favoritos.component.scss'
 })
 export class ListFavoritosComponent {
+
+  openPdfModal(): void {
+    const dialogRef = this.dialog.open(VisualizarFavoritosComponent, {
+      width: '80%',
+      height: '90%'
+    });
+  }
+
   displayedColumns: string[] = ['star','nro', 'tipo', 'nnormativa', 'fvigencia', 'version', 'acciones'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
     const users = Array.from({length: 200}, (_, k) => createNewUser(k + 1));
 

@@ -1,12 +1,11 @@
 <Form [formGroup]="myForm" (ngSubmit)="procesar()">
-            
     <table class="example-full-width" cellspacing="0">
         <tr>
             <td>
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Desde</mat-label>
 
-                    <input matInput formControlName="desde" [matDatepicker]="picker"  name="buscarDesde">
+                    <input matInput formControlName="desde" [matDatepicker]="picker" name="buscarDesde">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="myForm.get('desde').errors && myForm.get('desde').dirty">
@@ -16,8 +15,9 @@
                         <ng-container *ngIf="myForm.get('desde').hasError('pattern')">
                             El formato de fecha es incorrecto (Dia/Mes/Año)
                         </ng-container>
-                    </mat-error> 
-                </mat-form-field>  
+                    </mat-error>
+                </mat-form-field>
+
             </td>
             <td>
                 <mat-form-field class="example-full-width" appearance="outline">
@@ -29,13 +29,11 @@
                 </mat-form-field>
             </td>
         </tr>
-    </table> 
+    </table>
 
-</Form>
-
-
-<!-- <section>
+    <section>
         <div class="example-button-row">
             <button mat-raised-button color="primary" type="submit">Buscar</button>
         </div>
-    </section> -->
+    </section>
+</Form>

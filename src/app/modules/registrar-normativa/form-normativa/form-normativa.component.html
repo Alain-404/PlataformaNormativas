@@ -1,7 +1,75 @@
 <Form [formGroup]="myForm" (ngSubmit)="procesar()" novalidate>
     
-    
-    <mat-form-field class="fieldform" appearance="outline">
+    <mat-form-field class="fieldform fieldformChip" appearance="outline">
+        <mat-label>Proceso</mat-label>
+        <mat-chip-grid #chipGridProceso aria-label="Proceso selection" [formControl]="ProcesoCtrl">
+            @for (Proceso of Procesos; track Proceso) {
+            <mat-chip-row (removed)="removeProceso(Proceso)">
+                {{Proceso}}
+                <button matChipRemove [attr.aria-label]="'remove ' + Proceso">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+            }
+            <input #ProcesoInput [matChipInputFor]="chipGridProceso" [matAutocomplete]="autoProceso"
+                (keydown)="onInputKeydownProceso($event)"/>
+            <mat-autocomplete #autoProceso="matAutocomplete" (optionSelected)="selectedProceso($event)">
+                @for (Proceso of filteredProcesos | async; track Proceso) {
+                <mat-option *ngIf="!Procesos.includes(Proceso)" [value]="Proceso">
+                    {{Proceso}}
+                </mat-option>
+                }
+            </mat-autocomplete>
+        </mat-chip-grid>
+    </mat-form-field>
+
+    <mat-form-field class="fieldform fieldformChip" appearance="outline">
+        <mat-label>Gerencia</mat-label>
+        <mat-chip-grid #chipGridGerencia aria-label="Gerencia selection" [formControl]="GerenciaCtrl">
+            @for (Gerencia of Gerencias; track Gerencia) {
+            <mat-chip-row (removed)="removeGerencia(Gerencia)">
+                {{Gerencia}}
+                <button matChipRemove [attr.aria-label]="'remove ' + Gerencia">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+            }
+            <input #GerenciaInput [matChipInputFor]="chipGridGerencia" [matAutocomplete]="autoGerencia"
+                (keydown)="onInputKeydownGerencia($event)"/>
+            <mat-autocomplete #autoGerencia="matAutocomplete" (optionSelected)="selectedGerencia($event)">
+                @for (Gerencia of filteredGerencias | async; track Gerencia) {
+                <mat-option *ngIf="!Gerencias.includes(Gerencia)" [value]="Gerencia">
+                    {{Gerencia}}
+                </mat-option>
+                }
+            </mat-autocomplete>
+        </mat-chip-grid>
+    </mat-form-field>
+
+    <mat-form-field class="fieldform fieldformChip" appearance="outline">
+        <mat-label>Perfil</mat-label>
+        <mat-chip-grid #chipGridPerfil aria-label="Perfil selection" [formControl]="PerfilCtrl">
+            @for (Perfil of Perfils; track Perfil) {
+            <mat-chip-row (removed)="removePerfil(Perfil)">
+                {{Perfil}}
+                <button matChipRemove [attr.aria-label]="'remove ' + Perfil">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip-row>
+            }
+            <input #PerfilInput [matChipInputFor]="chipGridPerfil" [matAutocomplete]="autoPerfil"
+                (keydown)="onInputKeydownPerfil($event)"/>
+            <mat-autocomplete #autoPerfil="matAutocomplete" (optionSelected)="selectedPerfil($event)">
+                @for (Perfil of filteredPerfils | async; track Perfil) {
+                <mat-option *ngIf="!Perfils.includes(Perfil)" [value]="Perfil">
+                    {{Perfil}}
+                </mat-option>
+                }
+            </mat-autocomplete>
+        </mat-chip-grid>
+    </mat-form-field>
+
+    <!-- <mat-form-field class="fieldform" appearance="outline">
     <mat-label>Proceso</mat-label>
     <mat-select [formControl]="proceso" multiple ormControlName="procesoNormativa" type="text"
         placeholder="Proceso" required>
@@ -9,27 +77,9 @@
         <mat-option [value]="topping">{{topping}}</mat-option>
         }
     </mat-select>
-</mat-form-field>
+    </mat-form-field> -->
 
-<mat-form-field class="fieldform" appearance="outline">
-    <mat-label>Gerencia</mat-label>
-    <mat-select [formControl]="gerencia" multiple ormControlName="gerenciaNormativa" type="text"
-        placeholder="Gerencia" required>
-        @for (topping of gerenciaList; track topping) {
-        <mat-option [value]="topping">{{topping}}</mat-option>
-        }
-    </mat-select>
-</mat-form-field>
 
-<mat-form-field class="fieldform" appearance="outline">
-    <mat-label>Perfil</mat-label>
-    <mat-select [formControl]="perfil" multiple ormControlName="perfilNormativa" type="text"
-        placeholder="Perfil" required>
-        @for (topping of perfilList; track topping) {
-        <mat-option [value]="topping">{{topping}}</mat-option>
-        }
-    </mat-select>
-</mat-form-field>
 <!--
 <mat-form-field class="chip-list" appearance="outline">
     <mat-label>Proceso</mat-label>
@@ -96,6 +146,7 @@
         <ng-container *ngIf="myForm.get('vigencia').hasError('required')">
             Este campo es requerido
         </ng-container>
+
         <ng-container *ngIf="myForm.get('vigencia').hasError('pattern')">
             El formato de fecha es incorrecto (Dia/Mes/Año)
         </ng-container>

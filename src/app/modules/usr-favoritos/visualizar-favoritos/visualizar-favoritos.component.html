@@ -1,0 +1,31 @@
+<mat-dialog-content (contextmenu)="handleMouseRightClick($event)" class="visorPdf">
+
+    <ngx-extended-pdf-viewer 
+    
+    [src]="'assets/doc/prueba.pdf'" 
+    [showFindButton]="false"
+    [showHandToolButton]="false"
+    [showSidebarButton]="false"
+    [showPagingButtons]="false"
+    [showOpenFileButton]="false"
+    [showPrintButton]="false"
+    [showDownloadButton]="false"
+    [showPropertiesButton]="false"
+    [showRotateButton]="false"
+    [showSecondaryToolbarButton]="false"
+    [showZoomButtons]="false"
+    [textLayer]="false"
+    [showBorders]="false"
+    [enablePrint]="false"
+    [showHandToolButton]="false"
+    [showSecondaryToolbarButton]="false"
+    [showSpreadButton]="false"
+    [showToolbar]="false"
+    [showFreeFloatingBar]="false"
+
+    useBrowserLocale="true" 
+    width="100%"
+    height="100%">
+    </ngx-extended-pdf-viewer>
+
+</mat-dialog-content>

@@ -10,6 +10,9 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+import { MatDialog } from '@angular/material/dialog';
+import { VisualizarProyectosComponent } from '../visualizar-proyectos/visualizar-proyectos.component';
+
 export interface UserData {
   nro: string;
   nnormativa: string;
@@ -68,13 +71,21 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   styleUrl: './list-proyectos.component.scss'
 })
 export class ListProyectosComponent {
+
+  openPdfModal(): void {
+    const dialogRef = this.dialog.open(VisualizarProyectosComponent, {
+      width: '80%',
+      height: '90%'
+    });
+  }
+
   displayedColumns: string[] = ['star','nro', 'nnormativa', 'fvigencia', 'version', 'acciones'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
     const users = Array.from({length: 200}, (_, k) => createNewUser(k + 1));
 

@@ -10,6 +10,9 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+import { MatDialog } from '@angular/material/dialog';
+import { VisualizarNormativasComponent } from '../visualizar-normativas/visualizar-normativas.component';
+
 export interface UserData {
   nro: string;
   nnormativa: string;
@@ -70,13 +73,20 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 })
 export class ListNormativasComponent {
 
+  openPdfModal(): void {
+    const dialogRef = this.dialog.open(VisualizarNormativasComponent, {
+      width: '80%',
+      height: '90%'
+    });
+  }
+
   displayedColumns: string[] = ['star','nro', 'nnormativa', 'fvigencia', 'version', 'acciones'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
 
     const users = Array.from({length: 200}, (_, k) => createNewUser(k + 1));
 

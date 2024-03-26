@@ -5,14 +5,15 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
-  selector: 'app-visualizar-guias',
+  selector: 'app-visualizar-normativas',
   standalone: true,
   imports: [MatDialogContent, NgxExtendedPdfViewerModule],
-  templateUrl: './visualizar-guias.component.html',
-  styleUrl: './visualizar-guias.component.scss'
+  templateUrl: './visualizar-normativas.component.html',
+  styleUrl: './visualizar-normativas.component.scss'
 })
-export class VisualizarGuiasComponent {
-  constructor(public dialogRef: MatDialogRef<VisualizarGuiasComponent>) {
+export class VisualizarNormativasComponent {
+
+  constructor(public dialogRef: MatDialogRef<VisualizarNormativasComponent>) {
     pdfDefaultOptions.assetsFolder = 'bleeding-edge';
    }
 
@@ -33,7 +34,5 @@ export class VisualizarGuiasComponent {
   handleMouseRightClick(event: MouseEvent) {
     event.preventDefault();
   }
-
-
 
 }
