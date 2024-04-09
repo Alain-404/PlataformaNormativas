@@ -7,6 +7,7 @@ import { ListControlUsuariosComponent } from './list-control-usuarios/list-contr
 import { ControlAccesoUsuariosComponent } from './control-acceso-usuarios.component';
 import { BuscadorFechaAccesosComponent } from './buscador-fecha-accesos/buscador-fecha-accesos.component';
 
+
 const routes: Routes = [
   {path: '', component: ControlAccesoUsuariosComponent, canActivate:[authGuard]},
   {path: 'busca', component: BuscadorFechaAccesosComponent, canActivate:[authGuard]},

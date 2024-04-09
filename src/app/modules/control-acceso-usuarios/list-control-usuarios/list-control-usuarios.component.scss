@@ -1,30 +1,52 @@
 table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
- 
-  .mat-column-nro {
-    max-width: 50px;
-  
-  }
+  width: 100%;
+}
 
-  
-  .mat-column-opciones {
-    max-width: 70px;
-  }
-  
-  .btnChange {
-    background-color: rgb(90, 10, 10);
-    color: rgb(255, 255, 255);
-    font-size: 11px;
-    padding: 10px;
-    margin-right: 10px;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
+.card-body {
+  background-color: rgb(235, 238, 245);
+  // background-color: rgb(210, 214, 222); 
+  border-radius: 10px;
+}
 
+.card {
+  width: 98%;
+}
 
-  
+.fieldform {
+  width: 100%;
+  margin-bottom: 0.8%;
+}
+
+section {
+  display: table;
+}
+
+.square-button_a {
+  height: 36px; /* Ajusta la altura según tu preferencia */
+  min-width: 36px; /* Ajusta el ancho mínimo según tu preferencia */
+  margin-right: 8px; /* Ajusta la separación entre botones */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.square-button_b {
+  height: 36px; /* Ajusta la altura según tu preferencia */
+  min-width: 36px; /* Ajusta el ancho mínimo según tu preferencia */
+  margin-right: 8px; /* Ajusta la separación entre botones */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.square-button_c {
+  height: 36px; /* Ajusta la altura según tu preferencia */
+  min-width: 36px; /* Ajusta el ancho mínimo según tu preferencia */
+  margin-right: 8px; /* Ajusta la separación entre botones */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
